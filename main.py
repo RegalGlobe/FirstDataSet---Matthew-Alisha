@@ -55,23 +55,24 @@ def binarySearch (sortedArr, searchItem):
 #Indirect Array Function
 
 
-numList = [ 7, 15, 21, 34, 378234, 11,88, 3 ]
-print(SelectionSort(numList))
 
 #dicionary assignment
-
-file_name = input("Please enter the file name:")
 try:
-    
-    if file_name == "fruitlist.txt":
-      fruits = open("fruitlist.txt", "r")  
-      file = fruits.read()
-      print(file)
-
+  fruits = open("fruitlist.txt", "r")  #reading the file
+  file = fruits.read()
+  print(file)
 except Exception:
-    print("file not found")
+  fileFound = False
+  altDir = input("file not found, type in where the file is")
+  while not fileFound:
+    try:
+      fruits = open(altDir, "r")
+      file = fruits.read()
+      fileFound = True
+    except:
+      altDir = input("File not found, type in where the file is")
 
-
+file = file.strip() #we cant use strip
 def remove_space(tmpFile):
   if "," in file:
     tmpFile = tmpFile.split(",")
@@ -80,9 +81,8 @@ def remove_space(tmpFile):
 
   tmpFile_upper = [names.upper() for names in tmpFile]
   return (tmpFile_upper)
-
-
-def makeDictionary(tmpFile_upper):
+  
+def makeDictionary (tmpFile_upper):
   dict = {}
   num = -1
   for i in tmpFile_upper:
@@ -97,21 +97,18 @@ def makeDictionary(tmpFile_upper):
     dict[i] = value
   return (dict)
 
-
 def charCount(tmpFile):
-  list = sorted(str(tmpFile))
+  list = str(tmpFile)
   dic = {}
   for i in list:
     dic[i] = list.count(i)
-  if i not in list:
-    del dic[i]
   del dic['[']
   del dic["'"]
   del dic[","]
   del dic[']']
   del dic[' ']
   return (dic)
-  
+
 arrangedList = remove_space(file)
 fullDict = makeDictionary(arrangedList)
 charCountDict = charCount(arrangedList)
@@ -123,5 +120,5 @@ print("")
 print(charCountDict)
 
 fruits.close()
-#closing the file
+#closing the file DICTIONARY ASSINGMENT END-------------------------------------------
 
